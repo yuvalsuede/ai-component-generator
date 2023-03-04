@@ -10,7 +10,7 @@ class MyDocument extends Document {
             name="description"
             content="Convert any Javascript code into TypeScript with ChatGPT in seconds."
           />
-          <meta property="og:site_name" content="js2ts.com" />
+          <meta property="og:site_name" content="ai2ui.co" />
           <meta
             property="og:description"
             content="Convert any Javascript code into TypeScript with ChatGPT in seconds."

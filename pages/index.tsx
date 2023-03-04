@@ -137,14 +137,14 @@ const Home: NextPage = () => {
                             {generatedCode && (
                                 <>
                                     <div>
-                                        <h2 className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto">
-                                            Your TypeScript code
+                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 font-normal mx-auto">
+                                            There we go. Click to copy the code
                                         </h2>
                                     </div>
                                     <div
-                                        className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
+                                        className="space-y-8 flex flex-col items-center justify-center  mx-auto w-full">
                                         <div
-                                            className=" whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full"
+                                            className="w-full whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(generatedCode);
                                                 toast("Code copied to clipboard", {
