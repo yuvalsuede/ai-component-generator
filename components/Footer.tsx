@@ -11,7 +11,7 @@ export default function Footer() {
                   rel="noreferrer"
                   className="font-bold hover:underline transition underline-offset-2"
               >
-                  Yuval Suede. {" "} Looking for consultancy?  {" "}
+                  Yuval Suede.
               </a>
           </div>
           <div className="sm:text-right">

@@ -10,13 +10,13 @@ export default function Header() {
         </h1>
       </Link>
       <a
-        href="https://ai2ui.co/"
+        href="https://www.linkedin.com/in/yuval-suede/"
         target="_blank"
         rel="noreferrer"
       >
         <Image
           alt="ChatGPT Icon"
-          src="/ChatGPT_logo.svg"
+          src="/me.png"
           className="sm:w-10 sm:h-[40px] w-10 h-[40px] rounded-full"
           width={32}
           height={28}

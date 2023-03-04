@@ -73,7 +73,6 @@ const Home: NextPage = () => {
         let done = false;
         const {value, done: doneReading} = await reader.read();
 
-        console.log(decoder.decode(value))
         const code = removeCodeWrapping(decoder.decode(value))
 
         setGeneratedCode(code);
