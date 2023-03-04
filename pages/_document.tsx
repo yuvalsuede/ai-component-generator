@@ -8,19 +8,19 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="Convert any Javascript code into TypeScript with ChatGPT in seconds."
+            content="AI component Generator by Yuval Suede"
           />
           <meta property="og:site_name" content="ai2ui.co" />
           <meta
             property="og:description"
-            content="Convert any Javascript code into TypeScript with ChatGPT in seconds."
+            content="Generate any UI component in seconds."
           />
           <meta property="og:title" content="Javascript to Typescript converter with ChatGPT" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Javascript to Typescript converter with ChatGPT" />
+          <meta name="twitter:title" content="Generate any UI component in seconds." />
           <meta
             name="twitter:description"
-            content="Convert any Javascript code into TypeScript with ChatGPT in seconds."
+            content="Generate any UI component in seconds."
           />
           <meta
             property="og:image"

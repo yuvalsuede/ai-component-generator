@@ -89,7 +89,7 @@ const Home: NextPage = () => {
 
             <Header/>
 
-            <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-10">
+            <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
                     Ask for any <span style={{color: '#7AAC9F'}}>component</span>
 
