@@ -14,6 +14,13 @@ import ResizablePanel from "../components/ResizablePanel";
 import { Portal } from 'react-portal';
 import dynamic from 'next/dynamic';
 
+function removeCodeWrapping(str: string) {
+    if (str.startsWith("```") && str.endsWith("```")) {
+        return str.slice(3, -3);
+    } else {
+        return str;
+    }
+}
 
 const Home: NextPage = () => {
     const [loading, setLoading] = useState(false);
@@ -67,8 +74,9 @@ const Home: NextPage = () => {
         const {value, done: doneReading} = await reader.read();
 
         console.log(decoder.decode(value))
+        const code = removeCodeWrapping(decoder.decode(value))
 
-        setGeneratedCode(decoder.decode(value));
+        setGeneratedCode(code);
         setLoading(false);
     };
 
