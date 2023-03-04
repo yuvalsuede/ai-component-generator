@@ -144,7 +144,7 @@ const Home: NextPage = () => {
                                     <div
                                         className="space-y-8 flex flex-col items-center justify-center  mx-auto w-full">
                                         <div
-                                            className="w-full whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full"
+                                            className="w-full whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full flex items-center justify-center"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(generatedCode);
                                                 toast("Code copied to clipboard", {

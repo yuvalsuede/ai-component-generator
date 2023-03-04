@@ -24,11 +24,11 @@ class MyDocument extends Document {
           />
           <meta
             property="og:image"
-            content="https://js2ts.com/og-image-2.png"
+            content="https://ai2ui.co/og-image-3.png"
           />
           <meta
             name="twitter:image"
-            content="https://js2ts.com/og-image-2.png"
+            content="https://ai2ui.co/og-image-3.png"
           />
         </Head>
         <body>
