@@ -1,88 +1,99 @@
 <p align="center">
   <a href="https://ai2ui.co">
-    <img  alt="logo" src="https://ai2ui.co/ai-component-generator-logo.png">
+    <img style="max-width: 400px;"  alt="logo" src="https://ai2ui.co/ai-component-generator-logo.png">
   </a>
+
 </p>
-<h1 align="center">Welcome to Linvo Linkedin Scraper</h1>
+<h1 align="center">Welcome to AI Component Generator with ChatGPT</h1>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank">
     <img alt="License: MIT License" src="https://img.shields.io/badge/License-MIT License-yellow.svg" />
   </a>
 </p>
 
-Here you can find secure scraping using Puppeteer for different Linkedin actions
-- [x] Login
-- [x] Scrape profiles: Sales Nav / Normal
-- [x] Connection Request
-- [x] Follow message
-- [x] Endorse Profile
-- [x] Visit Profile
-- [x] Like posts
-- [x] Random Engagement
 
-## Install
+This project generates almost any UI components with OpenAI's ChatGPT and allows you to copy the html code
 
-```sh
-npm install linvo-scraper puppeteer --save
+[![Twitter Bio Generator](./public/screenshot.png)](https://ai2ui.co)
+
+# [AI2UI](https://ai2ui.co/) component generator
+
+## How it works
+
+This project uses the [ChatGPT API](https://openai.com/api/) and [Vercel Edge functions](https://vercel.com/features/edge-functions). 
+It constructs a prompt based on the form and user input, sends it to the chatGPT API via a Vercel Edge function, then streams the response back to the application.
+You can ask for any UI component, free style. Most likely it will generate the right thing for you.
+This can also be used as a great bootstrap for projects, I tried to make the style Material-UI styled, but you can change this behavior.
+
+## Running Locally
+After cloning the repo, go to [OpenAI](https://beta.openai.com/account/api-keys) to make an account and put your API key in a file called `.env`(OPENAI_API_KEY)
+Then, run the application in the command line and it will be available at `http://localhost:3000`.
+
+```bash
+npm install
+
+yarn dev
 ```
 
-## Usage
+## Changing ChatGPT prompts and requests
+In order to change ChatGPT response you only need to give it an example of what you wish to get back (use the assistant role to generate an example of a good response)".
+In the example below I show it how to generate TailwindCSS and Next.js component, and later ask just to return the corresponding HTML code.
 
 ```javascript
-import * as LinvoScraper from 'linvo-scraper';
-import * as puppeteer from 'puppeteer';
 
-(async () => {
-    const browser = await puppeteer.launch({
-        headless: false
-    });
-    const page = (await browser.newPage());
-    const cdp = await page.target().createCDPSession();
+// /api/generate.ts
 
-    // that's the res Linvo is working in production
-    await page.setViewport({
-        width: 1440,
-        height: 900,
-    });
+const handler = async (req: Request): Promise<Response> => {
+    const {prompt} = (await req.json()) as {
+        prompt?: string;
+    };
 
-    // add ghost-cursor for maximum safety
-    await LinvoScraper.tools.loadCursor(page, true);
+    if (!prompt) {
+        return new Response("No prompt in the request", {status: 400});
+    }
 
-    // Login with Linkedin
-    const {token} = await LinvoScraper.services.login.process(page, cdp, {
-        user: 'bang@linvo.io',
-        password: 'superStrongPass!!%'
-    })
+    const payload: OpenAIStreamPayload = {
+        model: "gpt-3.5-turbo",
+        messages: [
+            {
+                "role": "user",
+                "content": "create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component"
+            },
+            {
+                "role": "assistant", "content": `
+                    import React from 'react';
+                    const MyComponent = () => {
+                      return (
+                        <div className="flex flex-col items-center justify-center h-screen">
+                          <h1 className="text-3xl font-bold mb-4">Hello World</h1>
+                          <p className="text-lg mb-4">Welcome to my Next.js component using Tailwind CSS</p>
+                          <button className="bg-purple-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">Click Me</button>
+                        </div>
+                      );
+                    };
+                    export default MyComponent;
+                `
+            },
+            {
+                "role": "user",
+                "content": "Please create html code with inline css what create the following component, Meterial UI look and feel, return only code"
+            },
+            {"role": "user", "content": prompt},
+        ],
+    };
 
-    // set cookies
-    await page.setCookie({
-        name: "li_at",
-        value: token,
-        httpOnly: true,
-        secure: true,
-        sameSite: "None",
-        priority: "Medium",
-        path: "/",
-        domain: ".www.linkedin.com",
-    });
+    const stream = await OpenAIStream(payload);
+    return new Response(stream);
+};
 
-    await LinvoScraper.services.connect.process(page, cdp, {
-        message: 'Hi Nevo! Let\'s connect!',
-        url: 'https://www.linkedin.com/in/nevo-david/'
-    })
-})();
 ```
 
 ## Who made this project
 
-This project was made by [Linvo](https://linvo.io) - The Safest Linkedin Automation Tool, and being maintained by [Nevo David](https://github.com/nevo-david)
-Any contribution is welcomed!
+My name is [Yuval](https://www.linkedin.com/in/yuval-suede/) - an entrepreneur at heart , I ❤️ building end-to-end systems that not only look amazing and feel state-of-the-art, but also have real meaning and impact.
 
 ## 🤝 Contributing
-
-[Please check our Contribution guide to get started!](https://github.com/linvo-io/linvo-scraper/blob/main/CONTRIBUTING.md)
-
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/linvo-io/linvo-scraper/issues?q=is%3Aopen).
+Contributions, issues and feature requests are welcome!<br />
 * Fork the repository, Clone it on your device. That's it 🎉
 * Finally make a pull request :)
 

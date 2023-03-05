@@ -25,24 +25,13 @@ function removeCodeWrapping(str: string) {
 const Home: NextPage = () => {
     const [loading, setLoading] = useState(false);
     const [prompt, setPrompt] = useState("");
-    const [mode, setMode] = useState<VibeType>("Junior");
     const [generatedCode, setGeneratedCode] = useState<any>("");
 
     useEffect(() => {
         console.log(generatedCode)
     }, [generatedCode]);
 
-    const getGeneratedCounter = (): string => {
-        const baseTime = new Date("March 3, 2023 13:00:00 GMT+7").getTime();  // Set the base time to 2pm Thailand time on March 2, 2023
-        const elapsedMilliseconds = new Date().getTime() - baseTime;
-        const elapsedMinutes = elapsedMilliseconds / (1000 * 60);
-        const codeSnippets = 118 + Math.floor(elapsedMinutes / 10) * 6;  // Calculate the number of code snippets converted based on the elapsed time
-
-        return `${codeSnippets} AI components generated so far.`;
-
-    }
-
-    const generateBio = async (e: any) => {
+    const generateUI = async (e: any) => {
         e.preventDefault();
         setGeneratedCode("");
         setLoading(true);
@@ -53,7 +42,6 @@ const Home: NextPage = () => {
             },
             body: JSON.stringify({
                 prompt,
-                mode
             }),
         });
         console.log("Edge function returned.");
@@ -90,14 +78,22 @@ const Home: NextPage = () => {
             <Header/>
 
             <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
+                <a
+                    className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100 mb-5"
+                    href="https://github.com/yuvalsuede/ai-component-generator"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <Github />
+                    <p>Star on GitHub</p>
+                </a>
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-                    Ask for any <span style={{color: '#7AAC9F'}}>component</span>
+                    Ask for any <span style={{color: '#1A6292'}}>component</span>
 
                 </h1>
                 <h2 className="sm:text-4xl text-4xl max-w-2xl font-bold text-slate-900  sm:mt-4">
                     AI will generate it for you
                 </h2>
-                <p className="text-slate-500 mt-5">{getGeneratedCounter()}</p>
                 <div className="max-w-xl w-full">
                     <div className="flex mt-10 items-center space-x-3">
                         <p className="text-left font-medium">
@@ -118,7 +114,7 @@ const Home: NextPage = () => {
                         <button
                             disabled={!prompt}
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
-                            onClick={(e) => generateBio(e)}
+                            onClick={(e) => generateUI(e)}
                         >
                             Make my day &rarr;
                         </button>
