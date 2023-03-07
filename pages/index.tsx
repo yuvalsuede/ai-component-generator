@@ -129,7 +129,8 @@ const Home: NextPage = () => {
                             <LoadingDots color="white" style="large"/>
                         </button>
                     )}
-                    <div>
+
+                    <div className="mt-px-20">
                         <form action="https://www.paypal.com/donate" method="post" target="_top">
                             <input type="hidden" name="business" value="9GEESLUNXZNV4"/>
                             <input type="hidden" name="amount" value="1"/>
