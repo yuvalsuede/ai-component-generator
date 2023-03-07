@@ -26,6 +26,8 @@ You can ask for any UI component, free style. Most likely it will generate the r
 This can also be used as a great bootstrap for projects, I tried to make the style Material-UI styled, but you can change this behavior.
 
 ## Running Locally
+This project is built with `Next.js` and `TailwindCSS`, so you can deploy it directly to Vercel.
+
 After cloning the repo, go to [OpenAI](https://beta.openai.com/account/api-keys) to make an account and put your API key in a file called `.env`(OPENAI_API_KEY)
 Then, run the application in the command line and it will be available at `http://localhost:3000`.
 
