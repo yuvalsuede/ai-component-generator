@@ -129,22 +129,6 @@ const Home: NextPage = () => {
                             <LoadingDots color="white" style="large"/>
                         </button>
                     )}
-
-                    <div className="mt-px-20">
-                        <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="business" value="9GEESLUNXZNV4"/>
-                            <input type="hidden" name="amount" value="1"/>
-                            <input type="hidden" name="no_recurring" value="1"/>
-                            <input type="hidden" name="item_name" value="Help me keeping it running"/>
-                            <input type="hidden" name="currency_code" value="USD"/>
-                            <input style={{border: 0}} type="image"
-                                   src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
-                                   name="submit" title="PayPal - The safer, easier way to pay online!"
-                                   alt="Donate with PayPal button"/>
-                            <img style={{border: 0}} alt="" src="https://www.paypal.com/en_IL/i/scr/pixel.gif" width="1"
-                                 height="1"/>
-                        </form>
-                    </div>
                 </div>
                 <Toaster
                     position="top-center"
