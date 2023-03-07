@@ -15,7 +15,7 @@ class MyDocument extends Document {
             property="og:description"
             content="Generate any UI component in seconds."
           />
-          <meta property="og:title" content="Javascript to Typescript converter with ChatGPT" />
+          <meta property="og:title" content="UI component generator with ChatGPT" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="Generate any UI component in seconds." />
           <meta
