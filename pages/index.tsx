@@ -68,6 +68,8 @@ const Home: NextPage = () => {
     };
 
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
             <Head>
@@ -134,10 +136,11 @@ const Home: NextPage = () => {
                             <input type="hidden" name="no_recurring" value="1"/>
                             <input type="hidden" name="item_name" value="Help me keeping it running"/>
                             <input type="hidden" name="currency_code" value="USD"/>
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
-                                   border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                            <input style={{border: 0}} type="image"
+                                   src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+                                   name="submit" title="PayPal - The safer, easier way to pay online!"
                                    alt="Donate with PayPal button"/>
-                            <img alt="" border="0" src="https://www.paypal.com/en_IL/i/scr/pixel.gif" width="1"
+                            <img style={{border: 0}} alt="" src="https://www.paypal.com/en_IL/i/scr/pixel.gif" width="1"
                                  height="1"/>
                         </form>
                     </div>
