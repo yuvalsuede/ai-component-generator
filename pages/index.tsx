@@ -11,7 +11,7 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 // @ts-ignore
-import { Portal } from 'react-portal';
+import {Portal} from 'react-portal';
 import dynamic from 'next/dynamic';
 
 function removeCodeWrapping(str: string) {
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <Github />
+                    <Github/>
                     <p>Star on GitHub</p>
                 </a>
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
@@ -127,6 +127,20 @@ const Home: NextPage = () => {
                             <LoadingDots color="white" style="large"/>
                         </button>
                     )}
+                    <div>
+                        <form action="https://www.paypal.com/donate" method="post" target="_top">
+                            <input type="hidden" name="business" value="9GEESLUNXZNV4"/>
+                            <input type="hidden" name="amount" value="1"/>
+                            <input type="hidden" name="no_recurring" value="1"/>
+                            <input type="hidden" name="item_name" value="Help me keeping it running"/>
+                            <input type="hidden" name="currency_code" value="USD"/>
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+                                   border="0" name="submit" title="PayPal - The safer, easier way to pay online!"
+                                   alt="Donate with PayPal button"/>
+                            <img alt="" border="0" src="https://www.paypal.com/en_IL/i/scr/pixel.gif" width="1"
+                                 height="1"/>
+                        </form>
+                    </div>
                 </div>
                 <Toaster
                     position="top-center"
@@ -155,7 +169,7 @@ const Home: NextPage = () => {
                                                 });
                                             }}
                                         >
-                                            <div dangerouslySetInnerHTML={{ __html: generatedCode }} />
+                                            <div dangerouslySetInnerHTML={{__html: generatedCode}}/>
 
                                         </div>
                                     </div>
