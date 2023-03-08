@@ -10,7 +10,7 @@ import Github from "../components/GitHub";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
-import { useDarkMode } from "../components/darkModeContext";
+import { useDarkMode, DarkModeButton } from "../components/darkModeContext";
 
 // @ts-ignore
 
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
 		if (!data) {
 			return;
 		}
-		debugger;
+
 		const reader = data.getReader();
 		const decoder = new TextDecoder();
 		let done = false;
@@ -73,11 +73,7 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<div
-			className={`${
-				mode === "dark" ? " bg-[#121212] " : ""
-			}flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen`}
-		>
+		<div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
 			<Head>
 				<title>AI to UI component generator</title>
 				<link rel="icon" href="/favicon.ico" />
@@ -86,6 +82,9 @@ const Home: NextPage = () => {
 			<Header />
 
 			<main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
+				<div className="block md:lg:hidden">
+					<DarkModeButton />
+				</div>
 				<a
 					className={`${
 						mode === "dark"
@@ -99,6 +98,7 @@ const Home: NextPage = () => {
 					<Github />
 					<p>Star on GitHub</p>
 				</a>
+
 				<h1
 					className={`${
 						mode === "dark" ? " text-white " : ""
@@ -133,8 +133,10 @@ const Home: NextPage = () => {
 						<button
 							disabled={!prompt}
 							className={`${
-								mode === "dark" ? "bg-white text-black  " : "bg-black "
-							}rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full`}
+								mode === "dark"
+									? "bg-white text-black  "
+									: "bg-black text-white  "
+							}rounded-xl  font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full`}
 							onClick={(e) => generateUI(e)}
 						>
 							Make my day &rarr;

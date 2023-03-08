@@ -16,7 +16,9 @@ export default function Header() {
 				</h1>
 			</Link>
 			<div className="flex flex-row justify-between items-center">
-				<DarkModeButton />
+				<div className="hidden md:lg:block">
+					<DarkModeButton />
+				</div>
 				<a
 					href="https://www.linkedin.com/in/yuval-suede/"
 					target="_blank"

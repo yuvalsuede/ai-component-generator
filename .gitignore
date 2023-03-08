@@ -38,3 +38,5 @@ next-env.d.ts
 
 # idea
 .idea
+
+yarn.lock
