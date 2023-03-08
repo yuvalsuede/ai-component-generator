@@ -82,7 +82,7 @@ const Home: NextPage = () => {
 			<Header />
 
 			<main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
-				<div className="block md:lg:hidden">
+				<div className="block md:lg:hidden pb-5">
 					<DarkModeButton />
 				</div>
 				<a

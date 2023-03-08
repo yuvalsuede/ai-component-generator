@@ -39,18 +39,7 @@ export default function Footer() {
 				</p>
 				<div className="h-16 sm:h-20 w-full flex items-center justify-center">
 					<Image
-						className={`h-full w-auto object-contain ${
-							mode === "dark" ? "hidden sm:block" : "block sm:hidden"
-						}`}
-						src="/whiteshark.svg"
-						alt=""
-						width={32}
-						height={28}
-					/>
-					<Image
-						className={`h-full w-auto object-contain ${
-							mode === "dark" ? "block sm:hidden" : "hidden sm:block"
-						}`}
+						className="h-full w-auto object-contain"
 						src="/blueshark.svg"
 						alt=""
 						width={32}
