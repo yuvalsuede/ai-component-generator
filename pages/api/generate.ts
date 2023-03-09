@@ -1,31 +1,33 @@
-import {OpenAIStream, OpenAIStreamPayload} from "../../utils/OpenAIStream";
+import { OpenAIStream, OpenAIStreamPayload } from '../../utils/OpenAIStream';
 
 if (!process.env.OPENAI_API_KEY) {
-    throw new Error("Missing env var from OpenAI");
+  throw new Error('Missing env var from OpenAI');
 }
 
 export const config = {
-    runtime: "edge",
+  runtime: 'edge',
 };
 
 const handler = async (req: Request): Promise<Response> => {
-    const {prompt} = (await req.json()) as {
-        prompt?: string;
-    };
+  const { prompt } = (await req.json()) as {
+    prompt?: string;
+  };
 
-    if (!prompt) {
-        return new Response("No prompt in the request", {status: 400});
-    }
+  if (!prompt) {
+    return new Response('No prompt in the request', { status: 400 });
+  }
 
-    const payload: OpenAIStreamPayload = {
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                "role": "user",
-                "content": "create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component"
-            },
-            {
-                "role": "assistant", "content": `
+  const payload: OpenAIStreamPayload = {
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'user',
+        content:
+          'create next.js + tailwind css code for button 200 x 100, light purple background, generate text on it. Please create a complete next.js component',
+      },
+      {
+        role: 'assistant',
+        content: `
                     import React from 'react';
                     const MyComponent = () => {
                       return (
@@ -37,19 +39,20 @@ const handler = async (req: Request): Promise<Response> => {
                       );
                     };
                     export default MyComponent;
-                `
-            },
-            {
-                "role": "user",
-                "content": "Please create html code with inline css what create the following component, Meterial UI look and feel, return only code"
-            },
-            {"role": "user", "content": "DO NOT wrap the returned code with ```"},
-            {"role": "user", "content": prompt},
-        ],
-    };
+                `,
+      },
+      {
+        role: 'user',
+        content:
+          'Please create html code with inline css what create the following component, Meterial UI look and feel, return only code',
+      },
+      { role: 'user', content: 'DO NOT wrap the returned code with ```' },
+      { role: 'user', content: prompt },
+    ],
+  };
 
-    const stream = await OpenAIStream(payload);
-    return new Response(stream);
+  const stream = await OpenAIStream(payload);
+  return new Response(stream);
 };
 
 export default handler;
