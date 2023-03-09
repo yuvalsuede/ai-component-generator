@@ -4,22 +4,20 @@ export interface OpenAIStreamPayload {
 }
 
 export async function OpenAIStream(payload: OpenAIStreamPayload) {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ''}`,
     },
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(payload),
   });
 
   const stream = await res.json();
 
   try {
-
-    return stream?.choices[0]?.message?.content || ''
-
+    return stream?.choices[0]?.message?.content || '';
   } catch (e) {
-      return e
+    return e;
   }
 }

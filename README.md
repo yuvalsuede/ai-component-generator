@@ -11,7 +11,6 @@
   </a>
 </p>
 
-
 This project generates almost any UI components with OpenAI's ChatGPT and allows you to copy the html code
 
 [![Twitter Bio Generator](./public/screenshot.png)](https://ai2ui.co)
@@ -20,12 +19,13 @@ This project generates almost any UI components with OpenAI's ChatGPT and allows
 
 ## How it works
 
-This project uses the [ChatGPT API](https://openai.com/api/) and [Vercel Edge functions](https://vercel.com/features/edge-functions). 
+This project uses the [ChatGPT API](https://openai.com/api/) and [Vercel Edge functions](https://vercel.com/features/edge-functions).
 It constructs a prompt based on the form and user input, sends it to the chatGPT API via a Vercel Edge function, then streams the response back to the application.
 You can ask for any UI component, free style. Most likely it will generate the right thing for you.
 This can also be used as a great bootstrap for projects, I tried to make the style Material-UI styled, but you can change this behavior.
 
 ## Running Locally
+
 This project is built with `Next.js` and `TailwindCSS`, so you can deploy it directly to Vercel.
 
 After cloning the repo, go to [OpenAI](https://beta.openai.com/account/api-keys) to make an account and put your API key in a file called `.env`(OPENAI_API_KEY)
@@ -38,6 +38,7 @@ yarn dev
 ```
 
 ## Changing ChatGPT prompts and requests
+
 In order to change ChatGPT response you only need to give it an example of what you wish to get back (use the assistant role to generate an example of a good response)".
 In the example below I show it how to generate TailwindCSS and Next.js component, and later ask just to return the corresponding HTML code.
 
@@ -95,13 +96,16 @@ const handler = async (req: Request): Promise<Response> => {
 My name is [Yuval](https://www.linkedin.com/in/yuval-suede/) - an entrepreneur at heart , I ❤️ building end-to-end systems that not only look amazing and feel state-of-the-art, but also have real meaning and impact.
 
 ## 🤝 Contributing
+
 Contributions, issues and feature requests are welcome!<br />
-* Fork the repository, Clone it on your device. That's it 🎉
-* Finally make a pull request :)
+
+- Fork the repository, Clone it on your device. That's it 🎉
+- Finally make a pull request :)
 
 ## 📝 License
 
 This project is [MIT License](https://opensource.org/licenses/MIT) licensed.
 
-***
+---
+
 We accept contribution with great love! Show your interest! Contribute!
