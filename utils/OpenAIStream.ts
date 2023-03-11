@@ -1,6 +1,11 @@
+export type ChatGPTMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 export interface OpenAIStreamPayload {
   model: string;
-  messages: any[];
+  messages: ChatGPTMessage[];
 }
 
 export async function OpenAIStream(payload: OpenAIStreamPayload) {
