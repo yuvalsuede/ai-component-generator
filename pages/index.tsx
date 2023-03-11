@@ -1,82 +1,41 @@
-import {AnimatePresence, motion} from "framer-motion";
-import type {NextPage} from "next";
+import { AnimatePresence, motion } from "framer-motion";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import React, {useEffect, useRef, useState} from "react";
-import {Toaster, toast} from "react-hot-toast";
-import DropDown, {VibeType} from "../components/DropDown";
+import React, { ChangeEvent, useCallback, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import Footer from "../components/Footer";
 import Github from "../components/GitHub";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 // @ts-ignore
-import {Portal} from 'react-portal';
-import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
+import { useChatGPT } from "./useChatGPT";
 
-function removeCodeWrapping(str: string) {
-    if (str.startsWith("```") && str.endsWith("```")) {
-        return str.slice(3, -3);
-    } else {
-        return str;
-    }
+enum DisplayMode {
+    Visual = 'visual',
+    Code = 'code'
 }
 
 const Home: NextPage = () => {
-    const [loading, setLoading] = useState(false);
     const [prompt, setPrompt] = useState("");
-    const [generatedCode, setGeneratedCode] = useState<any>("");
+    const { isLoading, generatedCode, generateUI, restart } = useChatGPT(() => setPrompt(""));
     const { t } = useTranslation('common');
+    const [mode, setMode] = useState(DisplayMode.Visual);
 
-    const generateUI = async (e: any) => {
-        e.preventDefault();
-        setGeneratedCode("");
-        setLoading(true);
-        const response = await fetch("/api/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                prompt,
-            }),
-        });
-        console.log("Edge function returned.");
+    const handleModeChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setMode(e.target.value as DisplayMode);
+    }, []);
 
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-
-        // This data is a ReadableStream
-        const data = response.body;
-        if (!data) {
-            return;
-        }
-
-        const reader = data.getReader();
-        const decoder = new TextDecoder();
-        let done = false;
-        const {value, done: doneReading} = await reader.read();
-
-        const code = removeCodeWrapping(decoder.decode(value))
-
-        setGeneratedCode(code);
-        setLoading(false);
-    };
-
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
             <Head>
                 <title>AI to UI component generator</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header/>
+            <Header />
 
             <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
                 <a
@@ -85,11 +44,11 @@ const Home: NextPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <Github/>
+                    <Github />
                     <p>{t('starOnGithub')}</p>
                 </a>
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-                    { t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
+                    {t('askForAny')} <span style={{ color: '#1A6292' }}>{t('component')}</span>
 
                 </h1>
                 <h2 className="sm:text-4xl text-4xl max-w-2xl font-bold text-slate-900  sm:mt-4">
@@ -109,42 +68,67 @@ const Home: NextPage = () => {
                         placeholder={t('exampleInput') || ''}
                     />
 
-                    {!loading && (
+                    {!isLoading && (<>
                         <button
                             disabled={!prompt}
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
-                            onClick={(e) => generateUI(e)}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                generateUI(prompt);
+                            }}
                         >
                             {t('cta')}&rarr;
                         </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                restart();
+                            }}>
+                            {t('reset')}
+                        </button>
+                    </>
                     )}
-                    {loading && (
+                    {isLoading && (
                         <button
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
                             disabled
                         >
-                            <LoadingDots color="white" style="large"/>
+                            <LoadingDots color="white" style="large" />
                         </button>
                     )}
                 </div>
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
-                    toastOptions={{duration: 2000}}
+                    toastOptions={{ duration: 2000 }}
                 />
-                <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700"/>
+                <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
                 <ResizablePanel>
                     <AnimatePresence mode="wait">
                         <motion.div className="space-y-10 my-10">
                             {generatedCode && (
                                 <>
                                     <div>
-                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 font-normal mx-auto">
+                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 mx-auto">
                                             There we go. Click to copy the code
                                         </h2>
                                     </div>
                                     <div
                                         className="space-y-8 flex flex-col items-center justify-center  mx-auto w-full">
+                                        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                                <div className="flex items-center pl-3">
+                                                    <input id="radio-visual" type="radio" checked={mode === DisplayMode.Visual} value={DisplayMode.Visual} onChange={handleModeChange} name="list-radio" defaultChecked className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                                    <label htmlFor="radio-visual" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">View Component</label>
+                                                </div>
+                                            </li>
+                                            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                                                <div className="flex items-center pl-3">
+                                                    <input id="radio-code" type="radio" checked={mode === DisplayMode.Code} value={DisplayMode.Code} onChange={handleModeChange} name="list-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                                                    <label htmlFor="radio-code" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">View Code</label>
+                                                </div>
+                                            </li>
+                                        </ul>
                                         <div
                                             className="w-full whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full flex items-center justify-center"
                                             onClick={() => {
@@ -154,8 +138,12 @@ const Home: NextPage = () => {
                                                 });
                                             }}
                                         >
-                                            <div dangerouslySetInnerHTML={{__html: generatedCode}}/>
-
+                                            {mode === DisplayMode.Visual && (
+                                                <div dangerouslySetInnerHTML={{ __html: generatedCode }} />
+                                            )}
+                                            {mode === DisplayMode.Code && (
+                                                <pre>{generatedCode}</pre>
+                                            )}
                                         </div>
                                     </div>
 
@@ -165,7 +153,7 @@ const Home: NextPage = () => {
                     </AnimatePresence>
                 </ResizablePanel>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
