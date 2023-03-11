@@ -5,7 +5,7 @@ export function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
         return str.slice(3, -3);
     } else {
-        return str;
+        return str.replace("```", "");
     }
 }
 
