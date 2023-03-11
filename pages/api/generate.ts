@@ -41,7 +41,7 @@ const handler = async (req: Request): Promise<Response> => {
             },
             {
                 "role": "user",
-                "content": "Please create html code with inline css what create the following component, Material UI look and feel, return only code"
+                "content": "Please create html code with inline css that creates the following component, Material UI look and feel, return only code"
             },
             {"role": "user", "content": "DO NOT wrap the returned code with ```"},
             {"role": "user", "content": prompt},
