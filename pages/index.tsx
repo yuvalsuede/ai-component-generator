@@ -133,7 +133,7 @@ const Home: NextPage = () => {
                             {generatedCode && (
                                 <>
                                     <div>
-                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 font-normal mx-auto">
+                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 mx-auto">
                                             There we go. Click to copy the code
                                         </h2>
                                     </div>
