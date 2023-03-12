@@ -3,6 +3,7 @@ import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
 import {useTranslation} from "next-i18next";
 import {useEffect} from "react";
+import TweetButton from "./TweetButton";
 
 export default function Header() {
     const { t, i18n } = useTranslation('common');
