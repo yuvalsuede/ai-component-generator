@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
 import {TwitterShareButton, TwitterIcon} from 'react-share';
 
 const TweetButton: React.FC = () => {
     const [showDonate, setShowDonate] = useState(false);
-    const router = useRouter();
     const url = `${process.env.SITE_URL}`;
 
     useEffect(() => {
