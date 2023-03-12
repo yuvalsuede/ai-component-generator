@@ -13,7 +13,7 @@ module.exports = {
         ];
     },
     env: {
-        
+
         SHOW_DONATE: process.env.SHOW_DONATE,
     },
 };
