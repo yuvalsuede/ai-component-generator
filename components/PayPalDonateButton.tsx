@@ -4,7 +4,6 @@ const PayPalDonateButton: React.FC = () => {
     const [showDonate, setShowDonate] = useState(false);
 
     useEffect(() => {
-        console.log(process.env.SHOW_DONATE)
         setShowDonate(process.env.SHOW_DONATE === 'true');
     }, []);
 

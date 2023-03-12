@@ -16,6 +16,7 @@ import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
 import PayPalDonateButton from "../components/PayPalDonateButton";
+import TweetButton from "../components/TweetButton";
 
 function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
@@ -89,6 +90,7 @@ const Home: NextPage = () => {
                     <Github/>
                     <p>{t('starOnGithub')}</p>
                 </a>
+
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
                     { t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
 
@@ -96,6 +98,7 @@ const Home: NextPage = () => {
                 <h2 className="sm:text-4xl text-4xl max-w-2xl font-bold text-slate-900  sm:mt-4">
                     {t('aiWillGenerateItForYou')}
                 </h2>
+
                 <div className="max-w-xl w-full">
                     <div className="flex mt-10 items-center space-x-3">
                         <p className="text-left font-medium">
@@ -165,7 +168,10 @@ const Home: NextPage = () => {
                         </motion.div>
                     </AnimatePresence>
                 </ResizablePanel>
+
                 <PayPalDonateButton />
+                <TweetButton />
+
             </main>
             <Footer/>
         </div>

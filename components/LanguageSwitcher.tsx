@@ -11,12 +11,9 @@ const LanguageSwitcher = () => {
 
     const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const locale = event.target.value;
-        console.log({locale})
         router.push(router.pathname, router.asPath, { locale });
     };
-    useEffect(() => {
-        console.log(flagSrc);
-    }, [flagSrc])
+
     return (
         <div className="relative mr-4">
             <select
