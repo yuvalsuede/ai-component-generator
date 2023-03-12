@@ -15,6 +15,7 @@ import {Portal} from 'react-portal';
 import dynamic from 'next/dynamic';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
+import PayPalDonateButton from "../components/PayPalDonateButton";
 
 function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
@@ -164,6 +165,7 @@ const Home: NextPage = () => {
                         </motion.div>
                     </AnimatePresence>
                 </ResizablePanel>
+                <PayPalDonateButton />
             </main>
             <Footer/>
         </div>
