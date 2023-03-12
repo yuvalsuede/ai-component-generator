@@ -25,6 +25,8 @@ const Home: NextPage = () => {
     const [loading, setLoading] = useState(false);
     const [prompt, setPrompt] = useState("");
     const [generatedCode, setGeneratedCode] = useState<any>("");
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const { t } = useTranslation('common');
 
     const generateUI = async (e: any) => {
@@ -43,7 +45,13 @@ const Home: NextPage = () => {
         console.log("Edge function returned.");
 
         if (!response.ok) {
-            throw new Error(response.statusText);
+          setError(true);
+          setErrorMessage("Something went wrong!");
+          setLoading(false);
+          console.log(response.statusText);
+          return;
+        } else {
+          setError(false);
         }
 
         // This data is a ReadableStream
@@ -97,13 +105,25 @@ const Home: NextPage = () => {
                     </div>
                     <textarea
                         value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
+                        onChange={(e) => {
+                          setPrompt(e.target.value);
+                          setError(false);
+                        }}
                         rows={4}
                         className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
                         placeholder={t('exampleInput') || ''}
                     />
 
-                    {!loading && (
+                    {!loading &&
+                      (error ? (
+                        <button
+                          disabled={!prompt}
+                          className="bg-red-600 rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-red-700 w-full"
+                          onClick={(e) => generateUI(e)}
+                        >
+                          <p>{errorMessage}</p>
+                        </button>
+                      ) : (
                         <button
                             disabled={!prompt}
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
@@ -111,7 +131,7 @@ const Home: NextPage = () => {
                         >
                             {t('cta')}&rarr;
                         </button>
-                    )}
+                    ))}
                     {loading && (
                         <button
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
