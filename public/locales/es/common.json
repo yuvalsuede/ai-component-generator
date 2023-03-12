@@ -1,0 +1,11 @@
+{
+  "componentGenerator": "generador de componentes",
+  "component": "componente",
+  "askForAny": "Pide cualquier",
+  "aiWillGenerateItForYou": "La IA lo generará por ti",
+  "whichComponent": "Describe qué componente necesitas",
+  "cta": "Vamos",
+  "starOnGithub": "Marcar con estrella en GitHub",
+  "exampleInput": "por ejemplo, una sección acerca de nosotros con 3 columnas de miembros del equipo, texto centrado e imágenes de perfil redondeadas",
+  "contact": "Contáctanos"
+}

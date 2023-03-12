@@ -8,6 +8,11 @@ import Github from "../components/GitHub";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
+import dynamic from 'next/dynamic';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import {useTranslation} from "next-i18next";
+import PayPalDonateButton from "../components/PayPalDonateButton";
+import TweetButton from "../components/TweetButton";
 
 function removeCodeWrapping(str: string) {
     if (str.startsWith("```") && str.endsWith("```")) {
@@ -21,10 +26,7 @@ const Home: NextPage = () => {
     const [loading, setLoading] = useState(false);
     const [prompt, setPrompt] = useState("");
     const [generatedCode, setGeneratedCode] = useState<any>("");
-
-    useEffect(() => {
-        console.log(generatedCode);
-    }, [generatedCode]);
+    const { t } = useTranslation('common');
 
     const generateUI = async (e: any) => {
         e.preventDefault();
@@ -77,20 +79,21 @@ const Home: NextPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <Github />
-                    <p>Star on GitHub</p>
+                    <Github/>
+                    <p>{t('starOnGithub')}</p>
                 </a>
+
                 <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-                    Ask for any{" "}
-                    <span style={{ color: "#1A6292" }}>component</span>
+                    { t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
                 </h1>
                 <h2 className="sm:text-4xl text-4xl max-w-2xl font-bold text-slate-900  sm:mt-4">
-                    AI will generate it for you
+                    {t('aiWillGenerateItForYou')}
                 </h2>
+
                 <div className="max-w-xl w-full">
                     <div className="flex mt-10 items-center space-x-3">
                         <p className="text-left font-medium">
-                            Describe which component you need{" "}
+                            {t('whichComponent')} {" "}
                         </p>
                     </div>
                     <textarea
@@ -98,9 +101,7 @@ const Home: NextPage = () => {
                         onChange={(e) => setPrompt(e.target.value)}
                         rows={4}
                         className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
-                        placeholder={
-                            "e.g. an about us section with 3 columns of team members, centered text, rounded profile images"
-                        }
+                        placeholder={t('exampleInput') || ''}
                     />
 
                     {!loading && (
@@ -109,7 +110,7 @@ const Home: NextPage = () => {
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
                             onClick={(e) => generateUI(e)}
                         >
-                            Make my day &rarr;
+                            {t('cta')}&rarr;
                         </button>
                     )}
                     {loading && (
@@ -164,6 +165,10 @@ const Home: NextPage = () => {
                         </motion.div>
                     </AnimatePresence>
                 </ResizablePanel>
+
+                <PayPalDonateButton />
+                <TweetButton />
+
             </main>
             <Footer />
         </div>
@@ -171,3 +176,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// @ts-ignore
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common']))
+    }
+})
