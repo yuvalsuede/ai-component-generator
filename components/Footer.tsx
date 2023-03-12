@@ -14,7 +14,6 @@ export default function Footer() {
                 >
                     Yuval Suede
                 </a>
-                (contact me to suggest improvements).
             </div>
             <div className="sm:text-right ">
                 <div className="h-16 sm:h-20 w-full ">
