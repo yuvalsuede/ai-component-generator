@@ -2,11 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
 import {useTranslation} from "next-i18next";
-import {useEffect} from "react";
-import TweetButton from "./TweetButton";
 
 export default function Header() {
-    const { t, i18n } = useTranslation('common');
+    const { t } = useTranslation('common');
 
     return (
         <header className="flex justify-between items-center w-full mt-5 border-b-2 pb-7 sm:px-4 px-2">
