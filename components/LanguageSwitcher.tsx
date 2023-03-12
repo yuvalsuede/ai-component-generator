@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import {useEffect} from "react";
 
 const LanguageSwitcher = () => {
     const router = useRouter();
