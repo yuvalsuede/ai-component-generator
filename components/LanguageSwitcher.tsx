@@ -20,8 +20,8 @@ const LanguageSwitcher = () => {
                 onChange={changeLanguage}
                 className="appearance-none bg-transparent border-none outline-none shadow-none focus-none pl-10 focus:outline-none "
             >
-                <option value="en">{t('english')}</option>
-                <option value="es">{t('spanish')}</option>
+                <option value="en">{t('EN')}</option>
+                <option value="es">{t('SP')}</option>
             </select>
             <div className="absolute inset-y-0 left-0 flex items-center pl-2">
                 <Image src={flagSrc} alt={flagAlt} width={20} height={20} />

@@ -63,7 +63,7 @@ const Home: NextPage = () => {
     };
 
     return (
-        <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+        <div className="flex w-full mx-auto flex-col items-center justify-center py-2 min-h-screen">
             <Head>
                 <title>AI to UI component generator</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -82,10 +82,10 @@ const Home: NextPage = () => {
                     <p>{t('starOnGithub')}</p>
                 </a>
 
-                <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
+                <h1 className="sm:text-3xl text-2xl max-w-1xl font-bold text-slate-900">
                     { t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
                 </h1>
-                <h2 className="sm:text-4xl text-4xl max-w-2xl font-bold text-slate-900  sm:mt-4">
+                <h2 className="sm:text-2xl text-2xl max-w-1xl font-normal text-slate-900  sm:mt-4">
                     {t('aiWillGenerateItForYou')}
                 </h2>
 
