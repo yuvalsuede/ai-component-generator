@@ -4,6 +4,7 @@
   "askForAny": "Ask for any",
   "aiWillGenerateItForYou": "AI will generate it for you",
   "whichComponent": "Describe which component you need",
+  "whichPL": "Choose how to export your component",
   "cta": "Make my day",
   "starOnGithub": "Star on GitHub ❤️",
   "exampleInput": "e.g. an about us section with 3 columns of team members, centered text, rounded profile images",
