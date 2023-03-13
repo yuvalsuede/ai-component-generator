@@ -1,3 +1,6 @@
+import PayPalDonateButton from "./PayPalDonateButton";
+import React from "react";
+
 export default function Footer() {
     return (
         <footer className="text-center h-8 sm:h-16 w-full sm:pt-1 pt-2 border-t mt-2 flex sm:flex-row flex-col justify-between items-center px-3 space-y-3 sm:mb-0 mb-2">
@@ -13,9 +16,8 @@ export default function Footer() {
                 </a>
             </div>
             <div className="sm:text-right ">
-                <div className="h-16 sm:h-20 w-full ">
+                <PayPalDonateButton/>
 
-                </div>
             </div>
         </footer>
     );
