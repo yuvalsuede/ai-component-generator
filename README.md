@@ -25,6 +25,9 @@ It constructs a prompt based on the form and user input, sends it to the chatGPT
 You can ask for any UI component, free style. Most likely it will generate the right thing for you.
 This can also be used as a great bootstrap for projects, I tried to make the style Material-UI styled, but you can change this behavior.
 
+## Export your components
+You can now choose between HTML export of your UI components and your preferred combination of Tailwind CSS, Next.js, React.js, Material UI 
+
 ## Running Locally
 This project is built with `Next.js` and `TailwindCSS`, so you can deploy it directly to Vercel.
 
