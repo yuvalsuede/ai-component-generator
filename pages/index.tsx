@@ -133,13 +133,13 @@ const Home: NextPage = () => {
                             {generatedCode && (
                                 <>
                                     <div>
-                                        <h2 className="sm:text-2xl text-2xl font-bold text-gray-500 font-normal mx-auto">
-                                            There we go. Click to copy the code
+                                        <h2 className="sm:text-1xl text-1xl font-normal text-gray-600 font-normal mx-auto">
+                                            Click the element to copy the code 👇
                                         </h2>
                                     </div>
                                     <div className="space-y-8 flex flex-col items-center justify-center  mx-auto w-full">
                                         <div
-                                            className="w-full whitespace-normal bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border max-w-full flex items-center justify-center"
+                                            className="w-full whitespace-normal bg-white rounded-xl p-4 hover:bg-gray-100 transition cursor-copy max-w-full flex items-center justify-center"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(
                                                     generatedCode
