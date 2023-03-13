@@ -85,7 +85,7 @@ const Home: NextPage = () => {
                 <h1 className="sm:text-3xl text-2xl max-w-1xl font-normal text-slate-900">
                     { t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
                 </h1>
-                <h2 className="sm:text-2xl text-2xl max-w-1xl font-normal text-slate-900  sm:mt-4">
+                <h2 className="sm:text-xl text-xl max-w-1xl font-light text-gray-600  sm:mt-2">
                     {t('aiWillGenerateItForYou')}
                 </h2>
 
