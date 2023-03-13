@@ -14,7 +14,7 @@ const PayPalDonateButton: React.FC = () => {
     return (
         <>
             <div className="bg-gray-100 w-full mt-10 mb-10 p-4 text-xs">
-                This project is free to use, however the API is costly. Help me keeping it up and running :)
+                You can always buy me a coffee ☕️
             </div>
             <div dangerouslySetInnerHTML={{
                 __html: `
