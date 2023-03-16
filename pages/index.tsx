@@ -32,6 +32,33 @@ const Home: NextPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const { t } = useTranslation('common');
 
+    const handleError = (e: Response) => {
+        if (e.ok) {
+            setError(false);
+            return;
+        } else {
+            console.error(e.statusText);
+            switch (e.status) {
+                case 400:
+                    setErrorMessage("There was an error with the request.");
+                    break;
+                case 500:
+                    setErrorMessage("OpenAI API error.");
+                    break;
+                case 502:
+                    setErrorMessage("Gateway error.");
+                    break;
+                case 503:
+                    setErrorMessage("Service unavailable.");
+                    break;
+                default:
+                    setErrorMessage("Something went wrong!");
+            }
+            setError(true);
+            setLoading(false);
+        }
+    };
+
     const generateUI = async (e: any) => {
         e.preventDefault();
         setGeneratedCode("");
@@ -47,15 +74,7 @@ const Home: NextPage = () => {
         });
         console.log("Edge function returned.");
 
-        if (!response.ok) {
-          setError(true);
-          setErrorMessage("Something went wrong!");
-          setLoading(false);
-          console.log(response.statusText);
-          return;
-        } else {
-          setError(false);
-        }
+        handleError(response);
 
         // This data is a ReadableStream
         const data = response.body;
