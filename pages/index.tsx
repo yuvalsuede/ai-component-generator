@@ -10,7 +10,6 @@ import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
-import TweetButton from "../components/TweetButton";
 import RoundFilledNumber from "../components/RoundFilledNumber";
 import ExportSelection, {FRAMEWORKS} from "../components/ExportSelection";
 
@@ -127,6 +126,7 @@ const Home: NextPage = () => {
                     <p>{t('starOnGithub')}</p>
                 </a>
 
+
                 <h1 className="sm:text-3xl text-2xl max-w-1xl font-normal text-slate-900">
                     {t('askForAny')} <span style={{color: '#1A6292'}}>{t('component')}</span>
                 </h1>
@@ -225,8 +225,17 @@ const Home: NextPage = () => {
                     </AnimatePresence>
                 </ResizablePanel>
 
-                <TweetButton/>
-
+                <a
+                    href="https://jema.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <h1>Try Jema.ai - My open source Jasper alternative</h1>
+                    <div>
+                        <img className="mt-3"
+                             src={'https://jema.ai/Jemma.ai.png'} width="auto" height={200} alt={"jema.ai"}/>
+                    </div>
+                </a>
             </main>
             <Footer/>
         </div>
