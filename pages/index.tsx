@@ -224,18 +224,6 @@ const Home: NextPage = () => {
                         </motion.div>
                     </AnimatePresence>
                 </ResizablePanel>
-
-                <a
-                    href="https://jema.ai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h1>Try Jema.ai - My open source Jasper alternative</h1>
-                    <div>
-                        <img className="mt-3"
-                             src={'https://jema.ai/Jemma.ai.png'} width="auto" height={200} alt={"jema.ai"}/>
-                    </div>
-                </a>
             </main>
             <Footer/>
         </div>
