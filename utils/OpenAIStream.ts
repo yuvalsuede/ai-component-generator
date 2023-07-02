@@ -21,7 +21,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   const stream = await res.json();
 
   try {
-
+    if (stream.error) return stream.error.message;
     return stream?.choices[0]?.message?.content || ''
 
   } catch (e) {
