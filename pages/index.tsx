@@ -14,11 +14,6 @@ import RoundFilledNumber from "../components/RoundFilledNumber";
 import ExportSelection from "../components/ExportSelection";
 import { useChatGPT } from "./useChatGPT";
 
-enum DisplayMode {
-    Visual = 'visual',
-    Code = 'code'
-}
-
 const Home: NextPage = () => {
     const [prompt, setPrompt] = useState("");
     const { exportedGeneratedCode, isLoading, generatedCode, generateUI, restart, setSelectedExport } = useChatGPT(() => setPrompt(""));
