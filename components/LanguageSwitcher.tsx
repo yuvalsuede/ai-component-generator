@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import {useEffect} from "react";
 
 const LanguageSwitcher = () => {
     const router = useRouter();
@@ -11,12 +10,9 @@ const LanguageSwitcher = () => {
 
     const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const locale = event.target.value;
-        console.log({locale})
         router.push(router.pathname, router.asPath, { locale });
     };
-    useEffect(() => {
-        console.log(flagSrc);
-    }, [flagSrc])
+
     return (
         <div className="relative mr-4">
             <select
@@ -24,8 +20,8 @@ const LanguageSwitcher = () => {
                 onChange={changeLanguage}
                 className="appearance-none bg-transparent border-none outline-none shadow-none focus-none pl-10 focus:outline-none "
             >
-                <option value="en">{t('english')}</option>
-                <option value="es">{t('spanish')}</option>
+                <option value="en">{t('EN')}</option>
+                <option value="es">{t('SP')}</option>
             </select>
             <div className="absolute inset-y-0 left-0 flex items-center pl-2">
                 <Image src={flagSrc} alt={flagAlt} width={20} height={20} />

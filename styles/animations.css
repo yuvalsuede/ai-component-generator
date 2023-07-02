@@ -1,0 +1,36 @@
+@keyframes wobble {
+    0% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(-2deg);
+    }
+    30% {
+        transform: rotate(1deg);
+    }
+    45% {
+        transform: rotate(-1deg);
+    }
+    60% {
+        transform: rotate(1deg);
+    }
+    75% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.animate-wobble {
+    animation-name: wobble;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-delay: 5s;
+    animation-fill-mode: both;
+}
+
+.animate-wobble-delay {
+    animation-delay: 15s;
+}
