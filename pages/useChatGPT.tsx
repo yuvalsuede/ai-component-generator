@@ -49,11 +49,7 @@ export function useChatGPT(clear: () => void) {
             return;
         }
 
-        const reader = data.getReader();
-        const decoder = new TextDecoder();
-        const { value } = await reader.read();
-
-        const rawValue = decoder.decode(value);
+        const rawValue = await response.text();
         const reply = makeMessage('assistant', rawValue);
         setConversation(sofar => [...sofar, reply]);
 
