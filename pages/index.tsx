@@ -1,8 +1,8 @@
-import {AnimatePresence, motion} from "framer-motion";
-import type {NextPage} from "next";
+import { AnimatePresence, motion } from "framer-motion";
+import type { NextPage } from "next";
 import Head from "next/head";
-import React, {useState} from "react";
-import {Toaster, toast} from "react-hot-toast";
+import React, { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import Footer from "../components/Footer";
 import Github from "../components/GitHub";
 import Header from "../components/Header";
@@ -11,109 +11,26 @@ import ResizablePanel from "../components/ResizablePanel";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
 import RoundFilledNumber from "../components/RoundFilledNumber";
-import ExportSelection, {FRAMEWORKS} from "../components/ExportSelection";
-
-function removeCodeWrapping(str: string) {
-    if (str.startsWith("```") && str.endsWith("```")) {
-        return str.slice(3, -3);
-    } else {
-        return str;
-    }
-}
+import ExportSelection from "../components/ExportSelection";
+import { useChatGPT } from "./useChatGPT";
 
 const Home: NextPage = () => {
-    const [loading, setLoading] = useState(false);
     const [prompt, setPrompt] = useState("");
-    const [generatedCode, setGeneratedCode] = useState<any>("");
-    const [exportedGeneratedCode, setExportedGeneratedCode] = useState<any>("");
-    const [selectedExport, setSelectedExport] = useState<any>("html");
+    const { exportedGeneratedCode, isLoading, generatedCode, generateUI, restart, setSelectedExport } = useChatGPT(() => setPrompt(""));
     const {t} = useTranslation('common');
 
     const handleSelectedExport = (option: string) => {
         setSelectedExport(option)
     }
 
-    const generateUI = async (e: any) => {
-        e.preventDefault();
-        setGeneratedCode("");
-        setLoading(true);
-        const response = await fetch("/api/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                prompt,
-            }),
-        });
-        console.log("Edge function returned.");
-
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-
-        // This data is a ReadableStream
-        const data = response.body;
-        if (!data) {
-            return;
-        }
-
-        const reader = data.getReader();
-        const decoder = new TextDecoder();
-        const {value} = await reader.read();
-
-        const code = removeCodeWrapping(decoder.decode(value));
-        const selectedFrameworkName = FRAMEWORKS.find(framework => framework.value === selectedExport) || 'html';
-
-        if (selectedFrameworkName === 'html') {
-            // simple usecase
-            setExportedGeneratedCode(code);
-
-        } else {
-            // handle all other export frameworks
-            const translatedCode = await fetch("/api/export-code", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    prompt: code,
-                    framework : selectedFrameworkName
-                }),
-            });
-
-            console.log("Edge function returned.");
-
-            if (!translatedCode.ok) {
-                throw new Error(translatedCode.statusText);
-            }
-
-            // This data is a ReadableStream
-            const translatedCodeData = translatedCode.body;
-            if (!translatedCodeData) {
-                return;
-            }
-
-            const readerData = translatedCodeData.getReader();
-            const decoderData = new TextDecoder();
-            const {value: translatedCodeValue} = await readerData.read();
-            const newCode = decoderData.decode(translatedCodeValue)
-
-            setExportedGeneratedCode(newCode);
-        }
-
-        setGeneratedCode(code);
-        setLoading(false);
-    };
-
     return (
         <div className="flex w-full mx-auto flex-col items-center justify-center py-2 min-h-screen">
             <Head>
                 <title>AI to UI component generator</title>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Header/>
+            <Header />
 
             <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
                 <a
@@ -122,7 +39,7 @@ const Home: NextPage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <Github/>
+                    <Github />
                     <p>{t('starOnGithub')}</p>
                 </a>
 
@@ -160,32 +77,41 @@ const Home: NextPage = () => {
 
                     </div>
 
-                    {!loading && (
+                    {!isLoading && (<>
                         <button
                             disabled={!prompt}
-                            className=" bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8
-                         hover:bg-black/
-                    80 w-full"
-                            onClick={(e) => generateUI(e)}
+                            className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                generateUI(prompt);
+                            }}
                         >
                             {t('cta')}&rarr;
                         </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                restart();
+                            }}>
+                            {t('reset')}
+                        </button>
+                    </>
                     )}
-                    {loading && (
+                    {isLoading && (
                         <button
                             className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
                             disabled
                         >
-                            <LoadingDots color="white" style="large"/>
+                            <LoadingDots color="white" style="large" />
                         </button>
                     )}
                 </div>
                 <Toaster
                     position="top-center"
                     reverseOrder={false}
-                    toastOptions={{duration: 2000}}
+                    toastOptions={{ duration: 2000 }}
                 />
-                <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700"/>
+                <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
                 <ResizablePanel>
                     <AnimatePresence mode="wait">
                         <motion.div className="space-y-10 my-10">
@@ -225,7 +151,7 @@ const Home: NextPage = () => {
                     </AnimatePresence>
                 </ResizablePanel>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     )
         ;

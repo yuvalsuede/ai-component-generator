@@ -1,6 +1,11 @@
+export type ChatGPTMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+};
+
 export interface OpenAIStreamPayload {
   model: string;
-  messages: any[];
+  messages: ChatGPTMessage[];
 }
 
 export async function OpenAIStream(payload: OpenAIStreamPayload) {
@@ -16,7 +21,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   const stream = await res.json();
 
   try {
-
+    if (stream.error) return stream.error.message;
     return stream?.choices[0]?.message?.content || ''
 
   } catch (e) {

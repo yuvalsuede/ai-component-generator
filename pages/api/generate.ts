@@ -1,4 +1,4 @@
-import {OpenAIStream, OpenAIStreamPayload} from "../../utils/OpenAIStream";
+import {ChatGPTMessage, OpenAIStream, OpenAIStreamPayload} from "../../utils/OpenAIStream";
 
 if (!process.env.OPENAI_API_KEY) {
     throw new Error("Missing env var from OpenAI");
@@ -8,12 +8,13 @@ export const config = {
     runtime: "edge",
 };
 
+
 const handler = async (req: Request): Promise<Response> => {
-    const {prompt} = (await req.json()) as {
-        prompt?: string;
+    const {messages} = (await req.json()) as {
+        messages?: ChatGPTMessage[];
     };
 
-    if (!prompt) {
+    if (!messages) {
         return new Response("No prompt in the request", {status: 400});
     }
 
@@ -44,7 +45,7 @@ const handler = async (req: Request): Promise<Response> => {
                 "content": "Please create html code with inline css that creates the following component, Material UI look and feel, return only code"
             },
             {"role": "user", "content": "DO NOT wrap the returned code with ```"},
-            {"role": "user", "content": prompt},
+            ...messages
         ],
     };
 
