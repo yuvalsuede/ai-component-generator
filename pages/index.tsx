@@ -12,7 +12,7 @@ import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
 import {useTranslation} from "next-i18next";
 import RoundFilledNumber from "../components/RoundFilledNumber";
 import ExportSelection from "../components/ExportSelection";
-import { useChatGPT } from "./useChatGPT";
+import { useChatGPT } from "../hooks/useChatGPT";
 
 const Home: NextPage = () => {
     const [prompt, setPrompt] = useState("");
