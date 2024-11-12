@@ -13,6 +13,7 @@ import {useTranslation} from "next-i18next";
 import RoundFilledNumber from "../components/RoundFilledNumber";
 import ExportSelection from "../components/ExportSelection";
 import { useChatGPT } from "../hooks/useChatGPT";
+import { ArrowRight, Sparkles } from 'lucide-react'
 
 const Home: NextPage = () => {
     const [prompt, setPrompt] = useState("");

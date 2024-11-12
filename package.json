@@ -16,6 +16,7 @@
     "framer-motion": "^8.4.3",
     "fs": "^0.0.1-security",
     "i18next": "^22.4.11",
+    "lucide-react": "^0.456.0",
     "next": "latest",
     "next-i18next": "^13.2.2",
     "nextjs-google-analytics": "^2.3.3",
