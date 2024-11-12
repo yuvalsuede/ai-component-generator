@@ -174,28 +174,6 @@ const Home: NextPage = () => {
                     </AnimatePresence>
                 </ResizablePanel>
             </main>
-            <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 px-4 sm:px-6 lg:px-8 shadow-md">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div className="text-center sm:text-left">
-                            <h2 className="text-xl sm:text-2xl font-bold mb-2">
-                                Get this domain and app now
-                            </h2>
-                            <p className="text-blue-100 text-sm sm:text-base">
-                                Make it yours!
-                            </p>
-                        </div>
-                        <a
-                            href="https://www.linkedin.com/in/yuval-suede/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-150 ease-in-out"
-                        >
-                            Contact on LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </div>
             <Footer />
         </div>
     )
