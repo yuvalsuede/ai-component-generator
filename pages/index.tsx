@@ -32,29 +32,38 @@ const Home: NextPage = () => {
 
             <Header />
 
-            <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 px-4 sm:px-6 lg:px-8 shadow-md">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div className="text-center sm:text-left">
-                            <h2 className="text-xl sm:text-2xl font-bold mb-2">
-                                Get this domain and app now
-                            </h2>
-                            <p className="text-blue-100 text-sm sm:text-base">
-                                Make it yours!
+            <div className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-8 px-4 sm:px-6 lg:px-8 shadow-lg relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10">
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iMTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNTYiIGhlaWdodD0iMTAwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDU2IDEwMCBIIDAgTCAwIDAgTCA1NiAwIEwgNTYgMTAwIE0gMjggMTAwIE0gMjggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')]" />
+                </div>
+                <div className="max-w-7xl mx-auto relative">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="text-center md:text-left space-y-4 max-w-2xl">
+                            <div className="flex items-center justify-center md:justify-start space-x-2">
+                                <Sparkles className="h-6 w-6 text-yellow-300 animate-pulse" />
+                                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                                    Get this domain and app now!
+                                </h2>
+                            </div>
+                            <p className="text-indigo-100 text-base sm:text-lg md:text-xl">
+                                Don't miss out on this opportunity to make it yours and start your journey to success!
                             </p>
                         </div>
-                        <a
-                            href="https://www.linkedin.com/in/yuval-suede/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-150 ease-in-out"
-                        >
-                            Contact on LinkedIn
-                        </a>
+                        <div className="w-full md:w-auto">
+                            <a
+                                href="https://www.linkedin.com/in/yuval-suede/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group inline-flex items-center justify-center w-full md:w-auto px-8 py-4 text-lg font-bold text-indigo-600 bg-white rounded-full hover:bg-indigo-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl"
+                            >
+                                Contact on LinkedIn
+                                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500" />
             </div>
-
             <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
                 <a
                     className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100 mb-5 animate-wobble"
