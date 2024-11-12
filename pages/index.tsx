@@ -32,6 +32,29 @@ const Home: NextPage = () => {
 
             <Header />
 
+            <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 px-4 sm:px-6 lg:px-8 shadow-md">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="text-center sm:text-left">
+                            <h2 className="text-xl sm:text-2xl font-bold mb-2">
+                                Get this domain and app now
+                            </h2>
+                            <p className="text-blue-100 text-sm sm:text-base">
+                                Make it yours!
+                            </p>
+                        </div>
+                        <a
+                            href="https://www.linkedin.com/in/yuval-suede/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-150 ease-in-out"
+                        >
+                            Contact on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <main className="flex flex-1 w-full flex-col items-center text-center px-4 mt-12 sm:mt-10">
                 <a
                     className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-gray-600 shadow-md transition-colors hover:bg-gray-100 mb-5 animate-wobble"
@@ -151,6 +174,28 @@ const Home: NextPage = () => {
                     </AnimatePresence>
                 </ResizablePanel>
             </main>
+            <div className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 px-4 sm:px-6 lg:px-8 shadow-md">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div className="text-center sm:text-left">
+                            <h2 className="text-xl sm:text-2xl font-bold mb-2">
+                                Get this domain and app now
+                            </h2>
+                            <p className="text-blue-100 text-sm sm:text-base">
+                                Make it yours!
+                            </p>
+                        </div>
+                        <a
+                            href="https://www.linkedin.com/in/yuval-suede/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-150 ease-in-out"
+                        >
+                            Contact on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
             <Footer />
         </div>
     )
